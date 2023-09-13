@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-class AdminPage
+class AdminPagePlus
 {
     public function __construct()
     {
@@ -29,50 +29,50 @@ class AdminPage
     {
         add_submenu_page(
             'options-general.php',
-            'dpa-digitalwires-Import',
-            'dpa-digitalwires-Import',
+            'dpa-digitalwiresplus-Import',
+            'dpa-digitalwiresplus-Import',
             'manage_options',
-            'dpa-digitalwires',
+            'dpa-digitalwiresplus',
             array(&$this, 'admin_page_html')
         );
     }
 
     public function add_options()
     {
-        $cur_settings = get_option("dpa-digitalwires");
+        $cur_settings = get_option("dpa-digitalwiresplus");
 
         add_settings_section(
-            "dpa-digitalwires-section",
-            "dpa-digitalwires-Import",
+            "dpa-digitalwiresplus-section",
+            "dpa-digitalwiresplus-Import",
             array(&$this, "admin_page_description"),
-            "dpa-digitalwires"
+            "dpa-digitalwiresplus"
         );
 
         add_settings_field(
-            "dpa-digitalwires[dw_endpoint]",
+            "dpa-digitalwiresplus[dwp_endpoint]",
             "Endpunkt(e) (getrennt durch Zeilenumbruch)",
             array(&$this, "form_endpoint_html"),
-            "dpa-digitalwires",
-            "dpa-digitalwires-section",
-            $cur_settings["dw_endpoint"]
+            "dpa-digitalwiresplus",
+            "dpa-digitalwiresplus-section",
+            $cur_settings["dwp_endpoint"]
         );
 
         add_settings_field(
-            "dpa-digitalwires[dw_cron_time]",
+            "dpa-digitalwiresplus[dwp_cron_time]",
             "Abfragezyklus in Minuten",
             array(&$this, "form_cron_time_html"),
-            "dpa-digitalwires",
-            "dpa-digitalwires-section",
-            $cur_settings["dw_cron_time"]
+            "dpa-digitalwiresplus",
+            "dpa-digitalwiresplus-section",
+            $cur_settings["dwp_cron_time"]
         );
 
         add_settings_field(
-            "dpa-digitalwires[dw_active]",
+            "dpa-digitalwiresplus[dwp_active]",
             "Aktiviert",
             array(&$this, "form_active_html"),
-            "dpa-digitalwires",
-            "dpa-digitalwires-section",
-            $cur_settings["dw_active"]
+            "dpa-digitalwiresplus",
+            "dpa-digitalwiresplus-section",
+            $cur_settings["dwp_active"]
         );
     }
 
@@ -91,34 +91,34 @@ class AdminPage
         if (empty($cur_val)) {
             $cur_val = 5;
         }
-        echo '<input type="number" min="3" max="60" name="dpa-digitalwires[dw_cron_time]" id="dw_cron_time" value="' . $cur_val . '">';
+        echo '<input type="number" min="3" max="60" name="dpa-digitalwiresplus[dwp_cron_time]" id="dwp_cron_time" value="' . $cur_val . '">';
     }
 
     public function form_active_html($cur_val)
     {
-        echo '<input type="checkbox" name="dpa-digitalwires[dw_active]" id="dw_active" ' . checked(true, $cur_val, false) . ' />';
+        echo '<input type="checkbox" name="dpa-digitalwiresplus[dwp_active]" id="dwp_active" ' . checked(true, $cur_val, false) . ' />';
     }
 
     public function admin_page_html()
     {
         // check user capabilities
-        $dw_stats = get_option('dw_stats')
+        $dwp_stats = get_option('dwp_stats')
 ?>
         <div class="wrap">
             <form method="post" action="options.php">
-                <?php settings_fields("dpa-digitalwires") ?>
-                <?php do_settings_sections('dpa-digitalwires') ?>
+                <?php settings_fields("dpa-digitalwiresplus") ?>
+                <?php do_settings_sections('dpa-digitalwiresplus') ?>
                 <?php submit_button(); ?>
             </form>
             <code style="display: block;width: fit-content;">
-                Letzte Abfrage: <?php echo $dw_stats['last_run']; ?>
-                <?php if (isset($dw_stats['last_import_title'])) { ?>
+                Letzte Abfrage: <?php echo $dwp_stats['last_run']; ?>
+                <?php if (isset($dwp_stats['last_import_title'])) { ?>
                     <br><br>
-                    Letzter importierter Artikel: <?php echo $dw_stats['last_import_title'] ?> (<?php echo $dw_stats['last_import_urn'] ?>, <?php echo $dw_stats['last_import_timestamp'] ?>)
+                    Letzter importierter Artikel: <?php echo $dwp_stats['last_import_title'] ?> (<?php echo $dwp_stats['last_import_urn'] ?>, <?php echo $dwp_stats['last_import_timestamp'] ?>)
                 <?php } ?>
-                <?php if (isset($dw_stats['last_exception_message'])) { ?>
+                <?php if (isset($dwp_stats['last_exception_message'])) { ?>
                     <br><br>
-                    Letzter Import-Fehler: <?php echo $dw_stats['last_exception_message'] ?> (aufgetreten bei <?php echo $dw_stats['last_exception_urn'] ?>, <?php echo $dw_stats['last_exception_timestamp'] ?>)
+                    Letzter Import-Fehler: <?php echo $dwp_stats['last_exception_message'] ?> (aufgetreten bei <?php echo $dwp_stats['last_exception_urn'] ?>, <?php echo $dwp_stats['last_exception_timestamp'] ?>)
                 <?php } ?>
             </code>
         </div>

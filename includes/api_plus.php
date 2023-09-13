@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-class DigitalwiresAPI
+class digitalwiresplusAPI
 {
     public function __construct($url)
     {
