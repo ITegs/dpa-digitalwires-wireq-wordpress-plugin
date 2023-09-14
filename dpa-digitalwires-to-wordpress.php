@@ -185,7 +185,7 @@ if (!class_exists('DpaDigitalwiresPlus_Plugin')) {
             }
 
             require_once plugin_dir_path(__FILE__) . '/includes/admin_plus.php';
-            $this->admin_page = new AdminPage();
+            $this->admin_page = new AdminPagePlus();
 
             require_once plugin_dir_path(__FILE__) . '/includes/converter_plus.php';
             $this->converter = new ConverterPlus();
