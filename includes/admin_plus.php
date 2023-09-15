@@ -83,7 +83,7 @@ class AdminPagePlus
 
     public function form_endpoint_html($cur_val)
     {
-        echo '<textarea name="dpa[dpa_endpoint]" id="dpa_endpoint" rows="5" cols="50">' . $cur_val . '</textarea>';
+        echo '<textarea name="dpa-digitalwiresplus[dwp_endpoint]" id="dwp_endpoint" rows="5" cols="50">' . $cur_val . '</textarea>';
     }
 
     public function form_cron_time_html($cur_val)
